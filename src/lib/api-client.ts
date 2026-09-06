@@ -68,7 +68,7 @@ class ApiClient {
                 ApiClient.csrfToken = token;
                 config.headers['x-csrf-token'] = token;
                 ApiClient.onCsrfFetched(token);
-              } catch (error) {
+              } catch (_error) {
                 ApiClient.onCsrfFetched('');
               } finally {
                 ApiClient.isFetchingCsrf = false;
@@ -85,7 +85,8 @@ class ApiClient {
         (response) => response,
         (error: AxiosError) => {
           // 403 CSRF Error → Reset token agar di-fetch ulang pada request berikutnya
-          if (error.response?.status === 403 && (error.response.data as any)?.message?.includes('CSRF')) {
+          const data = error.response?.data as Record<string, unknown>;
+          if (error.response?.status === 403 && typeof data?.message === 'string' && data.message.includes('CSRF')) {
             ApiClient.csrfToken = null;
           }
           return Promise.reject(error);
