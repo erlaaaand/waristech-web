@@ -28,7 +28,7 @@ export function CtaSection() {
               size="lg"
               className="h-12 px-8 bg-accent text-accent-foreground hover:bg-accent/90 gap-2 font-semibold"
               render={
-                <Link href="#">
+                <Link href="https://github.com/erlaaaand/waristech-mobile/releases/latest/download/app-release.apk">
                   Download di Android
                   <ArrowRight className="h-4 w-4" />
                 </Link>
