@@ -30,7 +30,7 @@ export function PublicFooter() {
               />
             </Link>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground leading-relaxed">
-              Platform manajemen harta warisan digital yang sah secara Hukum Islam dan Hukum Positif Indonesia, dilindungi kriptografi dan divalidasi forensik AI.
+              Platform manajemen pewarisan aset dan kredensial digital terdesentralisasi berbasis sistem Proof-of-Life dan kriptografi Shamir's Secret Sharing.
             </p>
           </div>
 

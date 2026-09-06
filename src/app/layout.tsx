@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | WarisTech",
   },
   description:
-    "Platform manajemen harta warisan digital yang sah secara hukum Islam dan Positif, dilindungi kriptografi dan divalidasi forensik AI.",
+    "Platform manajemen pewarisan aset dan kredensial digital terdesentralisasi berbasis sistem Proof-of-Life dan kriptografi Shamir's Secret Sharing.",
   keywords: [
     "waris",
     "warisan digital",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "WarisTech — Manajemen Warisan Digital Berbasis Hukum",
     description:
-      "Platform manajemen harta warisan digital yang sah secara hukum Islam dan Positif.",
+      "Platform manajemen pewarisan aset dan kredensial digital terdesentralisasi berbasis sistem Proof-of-Life dan kriptografi Shamir's Secret Sharing.",
     type: "website",
     locale: "id_ID",
   },
