@@ -36,11 +36,11 @@ export function LoginForm({
       const response = await AuthService.login({ email, password })
       toast.success("Login berhasil!")
       
-      // Redirect based on role
+      // Redirect based on role with hard reload to apply HttpOnly cookie
       if (response.user.role === "ADMIN") {
-        router.push("/admin/dashboard")
+        window.location.href = "/admin/dashboard"
       } else {
-        router.push("/dashboard")
+        window.location.href = "/dashboard"
       }
     } catch (error: any) {
       toast.error(

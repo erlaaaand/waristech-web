@@ -48,7 +48,9 @@ function AdminLoginForm() {
         return;
       }
 
-      router.replace(from);
+      // Gunakan window.location.href untuk memaksa hard reload,
+      // agar HttpOnly cookie baru terkirim dengan benar pada request Server Component.
+      window.location.href = from;
     } catch (err: unknown) {
       if (err instanceof Error) {
         setServerError(err.message);
