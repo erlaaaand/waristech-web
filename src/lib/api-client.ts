@@ -36,6 +36,15 @@ class ApiClient {
         async (config: InternalAxiosRequestConfig) => {
           // Hanya tambahkan token CSRF untuk HTTP method yang memodifikasi data
           const methodsRequiringCsrf = ['post', 'put', 'patch', 'delete'];
+          
+          // Tambahkan Authorization header dari fallback cookie jika ada
+          if (typeof document !== 'undefined') {
+            const match = document.cookie.match(new RegExp('(^| )accessToken=([^;]+)'));
+            if (match && match[2]) {
+              config.headers['Authorization'] = `Bearer ${match[2]}`;
+            }
+          }
+
           if (config.method && methodsRequiringCsrf.includes(config.method.toLowerCase())) {
             
             // Bypass CSRF fetch jika request ini ADALAH request CSRF itu sendiri
