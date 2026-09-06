@@ -59,7 +59,7 @@ function AhliWarisRegistrationForm() {
     setErrorMsg(null)
 
     try {
-      await apiClient.post("/api/v1/auth/register/ahli-waris", {
+      await apiClient.post("/auth/register/ahli-waris", {
         fullName,
         email,
         password,
