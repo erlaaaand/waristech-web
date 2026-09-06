@@ -7,6 +7,7 @@ import {
   Users,
   Shield,
   ChevronRight,
+  Activity,
 } from "lucide-react";
 import {
   Sidebar,
@@ -22,6 +23,7 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/users", icon: Users, label: "Manajemen User" },
+  { href: "/admin/audit-logs", icon: Activity, label: "Audit Logs" },
 ];
 
 export function AdminSidebar() {
