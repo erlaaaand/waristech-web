@@ -299,7 +299,7 @@ export default function AdminDashboardPage() {
             ) : (
               <div className="space-y-1">
                 {recentLogs.data.map((log) => {
-                  const createdAt = new Date(log.createdAt);
+                  const createdAt = new Date(log.timestamp);
                   const severityStyle = getSeverityStyle(log.severity);
 
                   return (
@@ -396,7 +396,7 @@ export default function AdminDashboardPage() {
                       </p>
                       <p className="text-xs text-muted-foreground truncate">
                         {log.description || log.resource} —{" "}
-                        {new Date(log.createdAt).toLocaleDateString("id-ID")}
+                        {new Date(log.timestamp).toLocaleDateString("id-ID")}
                       </p>
                     </div>
                   </div>

@@ -109,10 +109,10 @@ const columns: ColumnDef<AuditLogDto>[] = [
     },
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: "timestamp",
     header: "Waktu",
     cell: ({ row }) => {
-      const d = new Date(row.original.createdAt);
+      const d = new Date(row.original.timestamp);
       return (
         <span className="text-xs text-muted-foreground tabular-nums whitespace-nowrap">
           {d.toLocaleDateString("id-ID", {

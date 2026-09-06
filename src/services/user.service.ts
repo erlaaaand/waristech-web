@@ -23,10 +23,11 @@ export class UserService {
   static async findPaginated(
     params: FindUsersParams = {}
   ): Promise<PaginatedUsersResponseDto> {
-    const { data } = await apiClient.get<PaginatedUsersResponseDto>("/users", {
-      params,
-    });
-    return data;
+    const { data } = await apiClient.get<{ data: PaginatedUsersResponseDto }>(
+      "/users",
+      { params }
+    );
+    return data.data;
   }
 
   /**
@@ -34,8 +35,8 @@ export class UserService {
    * Requires: UserRole.ADMIN
    */
   static async findById(id: string): Promise<UserDto> {
-    const { data } = await apiClient.get<UserDto>(`/users/${id}`);
-    return data;
+    const { data } = await apiClient.get<{ data: UserDto }>(`/users/${id}`);
+    return data.data;
   }
 
   /**
@@ -45,10 +46,9 @@ export class UserService {
   static async adminCreate(
     dto: AdminCreateUserDto
   ): Promise<{ message: string; userId: string }> {
-    const { data } = await apiClient.post<{ message: string; userId: string }>(
-      "/users/admin/create",
-      dto
-    );
-    return data;
+    const { data } = await apiClient.post<{
+      data: { message: string; userId: string };
+    }>("/users/admin/create", dto);
+    return data.data;
   }
 }

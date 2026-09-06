@@ -2,7 +2,7 @@
  * AuthService — wraps all /auth/* endpoints.
  * Never call apiClient directly from a React component.
  */
-import { apiClient } from "@/lib/api-client";
+import { apiClient, clearAccessToken, setAccessToken } from "@/lib/api-client";
 import type { AuthenticatedUser, AuthResponseDto, LoginDto } from "@/types/backend.types";
 
 export class AuthService {
@@ -17,7 +17,16 @@ export class AuthService {
     const body = await res.json();
     if (!res.ok) throw new Error(body.message || "Login failed");
     // Backend membungkus setiap response dalam envelope { statusCode, message, data }.
-    return body.data as AuthResponseDto;
+    const result = body.data as AuthResponseDto;
+
+    // Cookie HttpOnly `accessToken` di atas hanya berlaku untuk domain frontend,
+    // tidak ikut terkirim pada request langsung browser -> backend (domain
+    // berbeda). Simpan juga sebagai fallback Authorization header.
+    if (result.accessToken) {
+      setAccessToken(result.accessToken);
+    }
+
+    return result;
   }
 
   /** GET /auth/me — returns the authenticated user's JWT payload (sub/email/role). */
@@ -29,5 +38,6 @@ export class AuthService {
   /** POST /auth/logout — proxies to Next.js API route to clear HttpOnly cookie. */
   static async logout(): Promise<void> {
     await fetch("/api/auth/logout", { method: "POST" });
+    clearAccessToken();
   }
 }

@@ -5,11 +5,38 @@
  */
 import axios, { type AxiosError, type AxiosInstance, type InternalAxiosRequestConfig } from "axios";
 
+const ACCESS_TOKEN_STORAGE_KEY = "wt_access_token";
+
 class ApiClient {
   private static instance: AxiosInstance | null = null;
   private static csrfToken: string | null = null;
   private static isFetchingCsrf = false;
   private static csrfSubscribers: ((token: string) => void)[] = [];
+
+  /**
+   * Backend (Railway) dan frontend (Vercel) ada di domain berbeda, jadi
+   * cookie HttpOnly `accessToken` yang di-set untuk domain frontend TIDAK
+   * ikut terkirim pada request cross-origin browser -> backend. Sebagai
+   * fallback, token yang sama juga disimpan di localStorage lalu dikirim
+   * manual sebagai `Authorization: Bearer` -- JWT strategy backend
+   * menerima keduanya (lihat jwt.strategy.ts).
+   */
+  static setAccessToken(token: string) {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, token);
+    }
+  }
+
+  static clearAccessToken() {
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
+    }
+  }
+
+  private static getAccessToken(): string | null {
+    if (typeof window === "undefined") return null;
+    return window.localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY);
+  }
 
   private static onCsrfFetched(token: string) {
     this.csrfSubscribers.forEach((callback) => callback(token));
@@ -34,6 +61,12 @@ class ApiClient {
       // ── Request Interceptor (CSRF) ──────────────────────────────────────────
       ApiClient.instance.interceptors.request.use(
         async (config: InternalAxiosRequestConfig) => {
+          // Fallback Authorization header (lihat komentar setAccessToken di atas)
+          const accessToken = ApiClient.getAccessToken();
+          if (accessToken) {
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
+          }
+
           // Hanya tambahkan token CSRF untuk HTTP method yang memodifikasi data
           const methodsRequiringCsrf = ['post', 'put', 'patch', 'delete'];
 
@@ -99,3 +132,5 @@ class ApiClient {
 }
 
 export const apiClient = ApiClient.getInstance();
+export const setAccessToken = ApiClient.setAccessToken;
+export const clearAccessToken = ApiClient.clearAccessToken;

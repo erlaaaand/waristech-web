@@ -26,11 +26,11 @@ export class AuditLogService {
   static async findPaginated(
     params: FindAuditLogsParams = {}
   ): Promise<PaginatedAuditLogsDto> {
-    const { data } = await apiClient.get<PaginatedAuditLogsDto>(
+    const { data } = await apiClient.get<{ data: PaginatedAuditLogsDto }>(
       "/admin/audit-logs",
       { params }
     );
-    return data;
+    return data.data;
   }
 
   /**
@@ -38,9 +38,9 @@ export class AuditLogService {
    * Requires: UserRole.ADMIN
    */
   static async findById(id: string): Promise<AuditLogDto> {
-    const { data } = await apiClient.get<AuditLogDto>(
+    const { data } = await apiClient.get<{ data: AuditLogDto }>(
       `/admin/audit-logs/${id}`
     );
-    return data;
+    return data.data;
   }
 }

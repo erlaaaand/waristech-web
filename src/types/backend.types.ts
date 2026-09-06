@@ -54,6 +54,7 @@ export interface LoginDto {
 export interface AuthResponseDto {
   message: string;
   user: UserDto;
+  accessToken: string;
 }
 
 export interface AuthenticatedUser {
@@ -97,7 +98,7 @@ export interface AuditLogDto {
   userId?: string;
   description?: string;
   metadata?: Record<string, unknown>;
-  createdAt: string;
+  timestamp: string;
 }
 
 export interface PaginatedAuditLogsDto {

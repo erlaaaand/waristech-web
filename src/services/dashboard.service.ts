@@ -16,9 +16,9 @@ export class DashboardService {
    * Requires: UserRole.ADMIN
    */
   static async getStats(): Promise<DashboardStats> {
-    const { data } = await apiClient.get<DashboardStats>(
+    const { data } = await apiClient.get<{ data: DashboardStats }>(
       "/users/admin/dashboard-stats"
     );
-    return data;
+    return data.data;
   }
 }
