@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield } from "lucide-react";
+import Image from "next/image";
 
 const FOOTER_LINKS = {
   Produk: [
@@ -20,13 +20,14 @@ export function PublicFooter() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Shield className="h-4 w-4" />
-              </span>
-              <span>
-                Waris<span className="text-accent">Tech</span>
-              </span>
+            <Link href="/" className="flex items-center gap-2">
+              <Image 
+                src="/apps_logo.svg" 
+                alt="WarisTech Logo" 
+                width={140} 
+                height={36} 
+                className="h-9 w-auto grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" 
+              />
             </Link>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground leading-relaxed">
               Platform manajemen harta warisan digital yang sah secara Hukum Islam dan Hukum Positif Indonesia, dilindungi kriptografi dan divalidasi forensik AI.

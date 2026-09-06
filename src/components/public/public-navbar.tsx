@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Shield } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import { Button } from "../../components/ui/button";
 import { cn } from "../../lib/utils";
 
@@ -47,13 +48,15 @@ export function PublicNavbar() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <nav className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Shield className="h-4 w-4" />
-            </span>
-            <span className="text-foreground">
-              Waris<span className="text-accent">Tech</span>
-            </span>
+          <Link href="/" className="flex items-center gap-2">
+            <Image 
+              src="/apps_logo.svg" 
+              alt="WarisTech Logo" 
+              width={140} 
+              height={36} 
+              className="h-9 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop nav — anchor links dengan scroll-spy */}
