@@ -35,10 +35,6 @@ export function LoginForm({
     try {
       const response = await AuthService.login({ email, password })
       toast.success("Login berhasil!")
-
-      if ((response as any).accessToken) {
-        document.cookie = `accessToken=${(response as any).accessToken}; path=/; max-age=604800`;
-      }
       
       // Redirect based on role with hard reload to apply HttpOnly cookie
       if (response.user.role === "ADMIN") {

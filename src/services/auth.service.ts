@@ -6,9 +6,16 @@ import { apiClient } from "@/lib/api-client";
 import type { AuthResponseDto, LoginDto } from "@/types/backend.types";
 
 export class AuthService {
-  /** POST /auth/login — returns user data; JWT is set as HttpOnly cookie by backend. */
+  /** POST /auth/login — proxies to Next.js API route to set HttpOnly cookie. */
   static async login(dto: LoginDto): Promise<AuthResponseDto> {
-    const { data } = await apiClient.post<AuthResponseDto>("/auth/login", dto);
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dto),
+    });
+    
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Login failed");
     return data;
   }
 
@@ -20,11 +27,8 @@ export class AuthService {
     return data.user;
   }
 
-  /** POST /auth/logout — clears the HttpOnly cookie server-side. */
+  /** POST /auth/logout — proxies to Next.js API route to clear HttpOnly cookie. */
   static async logout(): Promise<void> {
-    if (typeof document !== 'undefined') {
-      document.cookie = 'accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-    }
-    await apiClient.post("/auth/logout");
+    await fetch("/api/auth/logout", { method: "POST" });
   }
 }

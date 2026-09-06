@@ -48,10 +48,6 @@ function AdminLoginForm() {
         return;
       }
 
-      if ((result as any).accessToken) {
-        document.cookie = `accessToken=${(result as any).accessToken}; path=/; max-age=604800`;
-      }
-
       // Gunakan window.location.href untuk memaksa hard reload,
       // agar HttpOnly cookie baru terkirim dengan benar pada request Server Component.
       window.location.href = from;
