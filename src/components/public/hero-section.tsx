@@ -157,9 +157,12 @@ export function HeroSection() {
           <motion.div
             whileHover={{ scale: 1.015 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative mx-auto w-[280px] rounded-[2.5rem] border-8 border-foreground/90 bg-foreground/90 p-2 shadow-2xl sm:w-[320px]"
+            className="relative mx-auto w-[280px] rounded-[2.5rem] border-[10px] border-foreground/90 bg-foreground/90 shadow-2xl sm:w-[320px]"
           >
-            <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[2rem]">
+            {/* Dynamic Island / Notch */}
+            <div className="absolute left-1/2 top-3 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-foreground/95" />
+            
+            <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[2rem] bg-background">
               <Image
                 src="/app-screenshot-home.png"
                 alt="Tampilan dashboard brankas digital WarisTech"
