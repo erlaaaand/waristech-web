@@ -54,6 +54,13 @@ function AhliWarisRegistrationForm() {
     const fullName = formData.get("fullName") as string
     const email = formData.get("email") as string
     const password = formData.get("password") as string
+    const phoneNumber = formData.get("phoneNumber") as string
+    const consentAgreed = formData.get("consentAgreed") === "on"
+
+    if (!consentAgreed) {
+      setErrorMsg("Anda wajib menyetujui pemrosesan data pribadi.")
+      return
+    }
 
     setIsRegistering(true)
     setErrorMsg(null)
@@ -63,12 +70,15 @@ function AhliWarisRegistrationForm() {
         fullName,
         email,
         password,
+        phoneNumber,
+        consentAgreed,
         invitationCode: kode,
       })
       setRegisterSuccess(true)
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
-        setErrorMsg(error.response.data.message)
+        const msg = error.response.data.message
+        setErrorMsg(Array.isArray(msg) ? msg[0] : msg)
       } else {
         setErrorMsg("Terjadi kesalahan saat mendaftar. Silakan coba lagi.")
       }
@@ -188,16 +198,43 @@ function AhliWarisRegistrationForm() {
               />
             </div>
             <div className="grid gap-2">
+              <Label htmlFor="phoneNumber">Nomor WhatsApp / Telepon</Label>
+              <Input
+                id="phoneNumber"
+                name="phoneNumber"
+                type="tel"
+                placeholder="Contoh: 081234567890"
+                required
+                disabled={isRegistering}
+              />
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Minimal 6 karakter"
+                placeholder="Min. 8 karakter (huruf besar, kecil & angka)"
                 required
                 disabled={isRegistering}
-                minLength={6}
+                minLength={8}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Password harus minimal 8 karakter, mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka."
               />
+            </div>
+
+            <div className="flex items-start gap-2 mt-2">
+              <input
+                type="checkbox"
+                id="consentAgreed"
+                name="consentAgreed"
+                className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                required
+                disabled={isRegistering}
+              />
+              <Label htmlFor="consentAgreed" className="text-xs font-normal leading-relaxed text-muted-foreground cursor-pointer">
+                Saya menyetujui pemrosesan data pribadi saya sesuai dengan UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (PDP).
+              </Label>
             </div>
 
             <Button type="submit" className="w-full mt-2" disabled={isRegistering}>
