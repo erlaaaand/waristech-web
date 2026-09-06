@@ -40,7 +40,7 @@ export function AdminHeader() {
             render={
               <Button variant="ghost" size="sm" className="gap-2">
                 <User className="h-4 w-4" />
-                {isLoading ? "Admin" : currentUser?.fullName ?? "Admin"}
+                {isLoading ? "Admin" : currentUser?.email ?? "Admin"}
               </Button>
             }
           />
