@@ -15,14 +15,14 @@
  */
 import { useEffect, useState } from "react"
 import { Check, Copy, ExternalLink } from "lucide-react"
-import { Button } from "@/src/components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/src/components/ui/card"
+} from "@/components/ui/card"
 
 interface DeepLinkBridgeProps {
   title: string

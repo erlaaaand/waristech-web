@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { DeepLinkBridge } from "@/src/components/public/deep-link-bridge"
+import { DeepLinkBridge } from "@/components/public/deep-link-bridge"
 
 export const metadata: Metadata = {
   title: "Verifikasi Saksi — WarisTech",

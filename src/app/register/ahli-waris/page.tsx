@@ -3,17 +3,17 @@
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Check, Copy, ExternalLink, Download, Loader2 } from "lucide-react"
-import { Button } from "@/src/components/ui/button"
-import { Input } from "@/src/components/ui/input"
-import { Label } from "@/src/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/src/components/ui/card"
-import { apiClient } from "@/src/lib/api-client"
+} from "@/components/ui/card"
+import { apiClient } from "@/lib/api-client"
 import axios from "axios"
 
 function AhliWarisRegistrationForm() {

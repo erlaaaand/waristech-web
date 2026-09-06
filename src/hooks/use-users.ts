@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserService, type FindUsersParams } from "@/services/user.service";
+import type { AdminCreateUserDto } from "@/types/backend.types";
 
 export const USER_KEYS = {
   all: ["users"] as const,
@@ -21,5 +22,16 @@ export function useUser(id: string) {
     queryKey: USER_KEYS.detail(id),
     queryFn: () => UserService.findById(id),
     enabled: !!id,
+  });
+}
+
+export function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (dto: AdminCreateUserDto) => UserService.adminCreate(dto),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: USER_KEYS.lists() });
+    },
   });
 }

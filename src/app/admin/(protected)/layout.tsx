@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AdminLayout({
+export default function AdminProtectedLayout({
   children,
 }: {
   children: React.ReactNode;

@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Users,
-  ScrollText,
   Shield,
   ChevronRight,
 } from "lucide-react";
@@ -23,7 +22,6 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/users", icon: Users, label: "Manajemen User" },
-  { href: "/admin/ai-logs", icon: ScrollText, label: "Log Forensik AI" },
 ];
 
 export function AdminSidebar() {

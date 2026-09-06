@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { UserPlus, Search } from "lucide-react";
 import { UserRole } from "@/types/backend.types";
+import { CreateNotarisSheet } from "@/components/admin/create-notaris-sheet";
 import {
   Select,
   SelectContent,
@@ -20,6 +21,7 @@ export default function AdminUsersPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState<string>("ALL");
+  const [createOpen, setCreateOpen] = useState(false);
 
   const { data, isLoading } = useUsers({
     page,
@@ -37,9 +39,9 @@ export default function AdminUsersPage() {
             Kelola data Pewaris, Ahli Waris, Notaris, dan Admin.
           </p>
         </div>
-        <Button className="gap-2">
+        <Button className="gap-2" onClick={() => setCreateOpen(true)}>
           <UserPlus className="h-4 w-4" />
-          Tambah Admin / Notaris
+          Tambah Notaris
         </Button>
       </div>
 
@@ -105,6 +107,8 @@ export default function AdminUsersPage() {
           Next
         </Button>
       </div>
+
+      <CreateNotarisSheet open={createOpen} onOpenChange={setCreateOpen} />
     </div>
   );
 }

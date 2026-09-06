@@ -14,9 +14,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AuthService } from "@/services/auth.service";
+import { useCurrentUser } from "@/hooks/use-auth";
 
 export function AdminHeader() {
   const router = useRouter();
+  const { data: currentUser, isLoading } = useCurrentUser();
 
   const handleLogout = async () => {
     try {
@@ -38,12 +40,14 @@ export function AdminHeader() {
             render={
               <Button variant="ghost" size="sm" className="gap-2">
                 <User className="h-4 w-4" />
-                Admin
+                {isLoading ? "Admin" : currentUser?.fullName ?? "Admin"}
               </Button>
             }
           />
           <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
+            <DropdownMenuLabel className="truncate">
+              {currentUser?.email ?? "Akun Saya"}
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="text-destructive focus:text-destructive cursor-pointer"
