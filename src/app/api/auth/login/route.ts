@@ -1,14 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
+import { fetchBackendCsrf } from "@/lib/backend-csrf";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
 
+    // Backend mewajibkan token CSRF (double-submit cookie) untuk request
+    // non-GET, termasuk login. Belum ada accessToken di titik ini, jadi
+    // token diambil tanpa cookie tambahan.
+    const { token: csrfToken, cookieHeader: csrfCookie } = await fetchBackendCsrf();
+
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-csrf-token": csrfToken,
+        ...(csrfCookie ? { Cookie: csrfCookie } : {}),
       },
       body: JSON.stringify(body),
     });
