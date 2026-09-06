@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Smartphone } from "lucide-react";
 import { Button } from "../../components/ui/button";
+import { Reveal } from "./reveal";
 
 export function CtaSection() {
   return (
-    <section id="download" className="py-24">
+    <section id="download" className="scroll-mt-20 py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="relative isolate overflow-hidden rounded-3xl bg-primary px-8 py-16 text-center shadow-2xl sm:px-16">
+        <Reveal className="relative isolate overflow-hidden rounded-3xl bg-primary px-8 py-16 text-center shadow-2xl sm:px-16">
           {/* Background glow */}
           <div
             aria-hidden="true"
@@ -36,11 +37,11 @@ export function CtaSection() {
             <Button
               size="lg"
               variant="outline"
-              className="h-12 px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              className="h-12 px-8 bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
               render={<Link href="/contact">Hubungi Tim Kami</Link>}
             />
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

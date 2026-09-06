@@ -1,3 +1,6 @@
+import { Badge } from "../../components/ui/badge";
+import { Reveal } from "./reveal";
+
 const STEPS = [
   {
     step: "01",
@@ -33,20 +36,28 @@ const STEPS = [
 
 export function HowItWorksSection() {
   return (
-    <section className="py-24 bg-muted/30">
+    <section id="cara-kerja" className="scroll-mt-20 py-24 bg-muted/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <Badge
+            variant="outline"
+            className="border-accent/40 text-accent-foreground bg-accent/10 font-medium px-4 py-1.5"
+          >
             Cara Kerja
-          </p>
+          </Badge>
           <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
             Proses yang Sederhana, Perlindungan yang Kuat
           </h2>
-        </div>
+        </Reveal>
 
         <ol className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {STEPS.map((item, index) => (
-            <li key={item.step} className="relative flex flex-col gap-3">
+            <Reveal
+              key={item.step}
+              index={index}
+              as="li"
+              className="group relative flex flex-col gap-3"
+            >
               {/* Connector line for desktop */}
               {index < STEPS.length - 1 && (
                 <div
@@ -54,14 +65,14 @@ export function HowItWorksSection() {
                   className="absolute top-5 left-full hidden lg:block w-full h-px bg-border -translate-y-1/2"
                 />
               )}
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-accent bg-accent/10 text-sm font-bold text-accent">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-accent bg-accent/10 text-sm font-bold text-accent-foreground transition-transform duration-300 group-hover:scale-110">
                 {item.step}
               </span>
               <h3 className="font-semibold text-foreground text-sm">{item.title}</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </div>

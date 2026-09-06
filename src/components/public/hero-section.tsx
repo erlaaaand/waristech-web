@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, KeyRound, ShieldCheck, Users2, ImageIcon } from "lucide-react";
+import { ArrowRight, KeyRound, ShieldCheck, Users2 } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 
@@ -65,7 +66,7 @@ export function HeroSection() {
             className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl leading-[1.08]"
           >
             Kunci Warisan Digital Anda,{" "}
-            <span className="gradient-text">Tak Pernah Utuh</span>{" "}
+            <span className="rounded-md bg-accent/15 px-1.5">Tak Pernah Utuh</span>{" "}
             di Satu Tangan
           </motion.h1>
 
@@ -104,7 +105,7 @@ export function HeroSection() {
               size="lg"
               variant="outline"
               className="h-12 px-8 text-base"
-              render={<Link href="/security">Lihat Cara Kerjanya</Link>}
+              render={<Link href="/#cara-kerja">Lihat Cara Kerjanya</Link>}
             />
           </motion.div>
 
@@ -153,22 +154,22 @@ export function HeroSection() {
           />
 
           {/* Bingkai ponsel */}
-          <div className="relative mx-auto w-[280px] rounded-[2.5rem] border-8 border-foreground/90 bg-foreground/90 p-2 shadow-2xl sm:w-[320px]">
-            <div className="absolute left-1/2 top-2 z-10 h-5 w-28 -translate-x-1/2 rounded-full bg-foreground/90" />
-            {/*
-              TODO(produk): ganti area placeholder di bawah dengan
-              screenshot aplikasi asli (mis. <Image src="/screenshots/brankas.png" fill />).
-              Dibiarkan kosong secara sengaja — belum ada aset final.
-            */}
-            <div className="flex aspect-[9/19.5] w-full flex-col items-center justify-center gap-3 rounded-[2rem] border-2 border-dashed border-background/30 bg-gradient-to-br from-primary to-primary/70 text-primary-foreground">
-              <ImageIcon className="h-10 w-10 opacity-60" />
-              <p className="px-6 text-center text-xs font-medium opacity-70">
-                Tangkapan layar aplikasi
-                <br />
-                segera hadir di sini
-              </p>
+          <motion.div
+            whileHover={{ scale: 1.015 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="relative mx-auto w-[280px] rounded-[2.5rem] border-8 border-foreground/90 bg-foreground/90 p-2 shadow-2xl sm:w-[320px]"
+          >
+            <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[2rem]">
+              <Image
+                src="/app-screenshot-home.png"
+                alt="Tampilan dashboard brankas digital WarisTech"
+                fill
+                unoptimized
+                className="object-cover object-top"
+                priority
+              />
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 

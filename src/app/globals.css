@@ -7,9 +7,9 @@
 /* ── WarisTech Design Tokens ───────────────────────────────────────────────── */
 @theme inline {
   /* Typography */
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-outfit);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-inter);
+  --font-heading: var(--font-source-serif);
 
   /* Colors mapped from CSS vars */
   --color-background: var(--background);
@@ -180,9 +180,5 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, var(--wt-navy), var(--wt-amber));
   }
 }
