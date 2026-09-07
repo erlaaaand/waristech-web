@@ -26,8 +26,12 @@ export function PublicFooter() {
                 alt="WarisTech Logo" 
                 width={140} 
                 height={36} 
-                className="h-9 w-auto grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" 
+                className="h-9 w-auto opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" 
               />
+
+              <p className="text-2xl font-bold tracking-tight text-[#215571] dark:text-[#28938E]">
+              WarisTech
+            </p>
             </Link>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground leading-relaxed">
               Kunci warisan digital yang tak pernah utuh di satu tangan. Menggunakan kriptografi Shamir&apos;s Secret Sharing dan verifikasi Notaris berlisensi.
