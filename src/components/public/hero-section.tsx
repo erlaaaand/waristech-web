@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, KeyRound, ShieldCheck, Users2 } from "lucide-react";
@@ -94,19 +93,25 @@ export function HeroSection() {
             <Button
               size="lg"
               className="gap-2 h-12 px-8 text-base"
-              render={
-                <Link href="#download">
-                  Download Gratis
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              }
-            />
+              onClick={() => {
+                const el = document.getElementById("download");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Download Gratis
+              <ArrowRight className="h-4 w-4" />
+            </Button>
             <Button
               size="lg"
               variant="outline"
               className="h-12 px-8 text-base"
-              render={<Link href="/#cara-kerja">Lihat Cara Kerjanya</Link>}
-            />
+              onClick={() => {
+                const el = document.getElementById("cara-kerja");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Lihat Cara Kerjanya
+            </Button>
           </motion.div>
 
           {/* Trust signals — mencerminkan mekanisme nyata, bukan klaim generik */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -22,7 +22,6 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 function AdminLoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get("from") ?? "/admin/dashboard";
 
@@ -48,9 +47,9 @@ function AdminLoginForm() {
         return;
       }
 
-      // Gunakan window.location.href untuk memaksa hard reload,
+      // Gunakan window.location.assign untuk memaksa hard reload,
       // agar HttpOnly cookie baru terkirim dengan benar pada request Server Component.
-      window.location.href = from;
+      window.location.assign(from);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setServerError(err.message);

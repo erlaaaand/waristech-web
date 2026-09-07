@@ -30,7 +30,7 @@ export function PublicFooter() {
               />
             </Link>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground leading-relaxed">
-              Platform manajemen pewarisan aset dan kredensial digital terdesentralisasi berbasis sistem Proof-of-Life dan kriptografi Shamir's Secret Sharing.
+              Kunci warisan digital yang tak pernah utuh di satu tangan. Menggunakan kriptografi Shamir&apos;s Secret Sharing dan verifikasi Notaris berlisensi.
             </p>
           </div>
 

@@ -101,7 +101,7 @@ class ApiClient {
                 ApiClient.csrfToken = token;
                 config.headers['x-csrf-token'] = token;
                 ApiClient.onCsrfFetched(token);
-              } catch (_error) {
+              } catch {
                 ApiClient.onCsrfFetched('');
               } finally {
                 ApiClient.isFetchingCsrf = false;

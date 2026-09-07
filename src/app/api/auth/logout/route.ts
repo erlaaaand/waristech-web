@@ -32,9 +32,9 @@ export async function POST(request: NextRequest) {
     nextResponse.cookies.delete("x-csrf-token");
 
     return nextResponse;
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { message: error.message || "Internal Server Error" },
+      { message: error instanceof Error ? error.message : "Internal Server Error" },
       { status: 500 }
     );
   }

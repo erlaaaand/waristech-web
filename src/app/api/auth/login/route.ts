@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         const [name, ...valueParts] = cookieNameValue.split('=');
         const value = valueParts.join('=');
 
-        const options: any = {};
+        const options: Record<string, string | number | boolean> = {};
         attributes.forEach(attr => {
           const [key, val] = attr.split('=');
           const lowerKey = key.toLowerCase();
@@ -56,17 +56,21 @@ export async function POST(request: NextRequest) {
         delete options.domain;
 
         nextResponse.cookies.set({
-          name: name,
-          value: value,
-          ...options
+          name,
+          value,
+          path: options.path as string,
+          maxAge: options.maxAge as number,
+          secure: options.secure as boolean,
+          httpOnly: options.httpOnly as boolean,
+          sameSite: options.sameSite as "lax" | "strict" | "none",
         });
       });
     }
 
     return nextResponse;
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { message: error.message || "Internal Server Error" },
+      { message: error instanceof Error ? error.message : "Internal Server Error" },
       { status: 500 }
     );
   }
