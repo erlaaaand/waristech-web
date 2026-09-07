@@ -48,17 +48,22 @@ export function PublicNavbar() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <nav className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <Image 
-              src="/apps_logo.svg" 
-              alt="WarisTech Logo" 
-              width={140} 
-              height={36} 
-              className="h-9 w-auto"
+          <Link
+            href="/"
+            className="flex items-center gap-3 group transition-opacity duration-200 hover:opacity-80"
+          >
+            <Image
+              src="/apps_logo.svg"
+              alt="WarisTech Logo"
+              width={140}
+              height={36}
+              className="h-9 w-auto object-contain"
               priority
             />
+            <p className="text-2xl font-bold tracking-tight text-[#215571] dark:text-[#28938E]">
+              WarisTech
+            </p>
           </Link>
-
           {/* Desktop nav — anchor links dengan scroll-spy */}
           <div className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
